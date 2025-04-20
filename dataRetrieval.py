@@ -29,7 +29,7 @@ def collectMovieIds(pages):
         popular_movies_url = f"{base_api_url}/movie/popular?api_key={api_key}&language=en-US&page={page}"
         response = requests.get(popular_movies_url)
 
-        # Collect and store Movie IDs for the first 100 pages of popular TMDB movies.
+        # Collect and store Movie IDs for the first 350 pages of popular TMDB movies.
         movies = response.json()['results']
         ids.extend(movie['id'] for movie in movies)
     return ids
@@ -57,28 +57,31 @@ def is_valid_movie(movie_data):
     return True
 
 # Main Processing
-pages = 100
+pages = 350
 movie_ids = collectMovieIds(pages)
 data = []
 
 for movie_id in tqdm(movie_ids):
-    details = get_movie_details(movie_id)
-    credits = get_movie_credits(movie_id)
+    try:
+        details = get_movie_details(movie_id)
+        credits = get_movie_credits(movie_id)
 
-    director = next((member['name'] for member in credits['crew'] if member['job'] == 'Director'), None)
+        director = next((member['name'] for member in credits['crew'] if member['job'] == 'Director'), None)
 
-    movie_data = {
-        'title': details.get('title'),
-        'budget': details.get('budget'),
-        'revenue': details.get('revenue'),
-        'runtime': details.get('runtime'),
-        'genres': ", ".join([genre['name'] for genre in details.get('genres', [])]),
-        'release_date': details.get('release_date'),
-        'production_companies': ", ".join([company['name'] for company in details.get('production_companies', [])]),
-        'director': director
-    }
-    if is_valid_movie(movie_data):
-        data.append(movie_data)
+        movie_data = {
+            'title': details.get('title'),
+            'budget': details.get('budget'),
+            'revenue': details.get('revenue'),
+            'runtime': details.get('runtime'),
+            'genres': ", ".join([genre['name'] for genre in details.get('genres', [])]),
+            'release_date': details.get('release_date'),
+            'production_companies': ", ".join([company['name'] for company in details.get('production_companies', [])]),
+            'director': director
+        }
+        if is_valid_movie(movie_data):
+            data.append(movie_data)
+    except:
+        continue
 
 # Convert to DataFrame
 df = pd.DataFrame(data)
