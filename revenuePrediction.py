@@ -1,3 +1,16 @@
+'''
+UI Revenue Prediction Tool
+
+High-Level Goal:
+Provide a user interface with the movie revenue prediction tool
+
+Low-Level Description: 1) Create a function to predict movie revenue based on pre-trained model.
+                       2) Build a UI with a title, instructions, input, button, and output in Streamlit.
+                       3) Run program.
+
+Notes: Final step in Movie Revenue Prediction project. Run with "streamlit run revenuePrediction.py".
+'''
+
 import streamlit as st
 import torch.nn as nn # Neural Network Library
 import torch.nn.functional as F # Helps move data in function.
