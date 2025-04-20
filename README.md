@@ -1,5 +1,5 @@
-# CitrusHack2025
-A movie revenue prediction model co-written by ChatGPT during the UC Riverside's 2025 Citrus Hackathon.
+# MoviePredictionModel
+A movie revenue prediction model co-written by ChatGPT with neural networks and UI design.
 
 Project Aspects:
 1. dataRetrieval.py: Leverages the TMDB API tool to gather movie budget, runtime, and release month.
