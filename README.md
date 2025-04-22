@@ -8,3 +8,5 @@ Project Aspects:
 
 Goals:
 Familiarize self with real-world data sets, machine learning techniques, UI design, and AI-assisted coding platforms.
+
+![Screenshot 2025-04-20 120352](https://github.com/user-attachments/assets/09239fbf-55f7-4ede-996a-66a4165d6df0)
